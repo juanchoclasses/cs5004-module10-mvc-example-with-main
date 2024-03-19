@@ -1,7 +1,7 @@
 package commands;
 
 /**
- * ModelImpl interface for a very simple MVC example. We have methods to get and set a String.
+ * Model interface for a very simple MVC example. We have methods to get and set a String.
  */
 public interface Model {
   /**
@@ -17,4 +17,11 @@ public interface Model {
    * @return the Echoed String
    */
   String getString();
+
+  /**
+   * Flip the String.
+   *
+   * @return the flipped String
+   */
+  String flipString();
 }

@@ -16,8 +16,7 @@ public class ModelTest {
   /**
    * Set up. Create two objects of type Model and set the string messages.
    */
-  @Before
-  public void setUp() {
+  @Before public void setUp() {
     m1 = new ModelImpl();
     m2 = new ModelImpl();
     m1.setString("Hello, world!");
@@ -27,10 +26,16 @@ public class ModelTest {
   /**
    * Test getString method.
    */
-  @Test
-  public void testGetString() {
+  @Test public void testGetString() {
     assertEquals("Hello, world!", m1.getString());
     assertEquals("You will never forget my name.", m2.getString());
+  }
+
+  /**
+   * Test flipString method.
+   */
+  @Test public void testFlipString() {
+    assertEquals("!dlrow ,olleH", m1.flipString());
   }
 
 }

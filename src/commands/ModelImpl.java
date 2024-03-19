@@ -17,4 +17,13 @@ public class ModelImpl implements Model {
   @Override public String getString() {
     return input;
   }
+
+  @Override public String flipString() {
+    StringBuilder inverted = new StringBuilder();
+    for (int index = 0; index < this.input.length(); index++) {
+      inverted.append(this.input.charAt(this.input.length() - 1 - index));
+    }
+    return inverted.toString();
+  }
+
 }

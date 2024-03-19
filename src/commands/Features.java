@@ -1,15 +1,16 @@
 package commands;
 
 /**
- * Interface for an asynchronous controller.
+ * Interface for an asynchronous controller. The user chooses the order of the commands.
  */
 public interface Features {
 
   /**
    * Provide view with all the callbacks.
+   *
    * @param v the view.
    */
-  public void setView(View v);
+  void setView(View v);
 
   /**
    * Toggle the color of the string.
@@ -27,7 +28,13 @@ public interface Features {
   void restoreToOriginalText();
 
   /**
+   * Flip the order of the characters in the String.
+   */
+  void flipText();
+
+  /**
    * Echo the String entered by the user.
+   *
    * @param typed the string entered by the user
    */
   void echoOutput(String typed);
