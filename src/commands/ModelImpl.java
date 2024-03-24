@@ -10,15 +10,18 @@ public class ModelImpl implements Model {
     input = "";
   }
 
-  @Override public void setString(String text) {
+  @Override
+  public void setString(String text) {
     input = text;
   }
 
-  @Override public String getString() {
+  @Override
+  public String getString() {
     return input;
   }
 
-  @Override public String flipString() {
+  @Override
+  public String flipString() {
     StringBuilder inverted = new StringBuilder();
     for (int index = 0; index < this.input.length(); index++) {
       inverted.append(this.input.charAt(this.input.length() - 1 - index));
