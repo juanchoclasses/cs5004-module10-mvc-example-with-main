@@ -19,8 +19,22 @@ public interface Features {
 
   /**
    * Convert the String characters to upper case.
+   *
+   * @param upperCase true if the characters should be upper case, false otherwise
    */
-  void makeUppercase();
+  void setUpperCase(boolean upperCase);
+
+  /**
+   * Get the upper case status of the text.
+   *
+   * @return true if the text is upper case, false otherwise
+   */
+  boolean getUpperCase();
+
+  /**
+   * get the text of the model
+   */
+  String getText();
 
   /**
    * Restore to the original capitalization of the text.

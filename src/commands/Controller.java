@@ -16,32 +16,43 @@ public class Controller implements Features {
     model = m;
   }
 
-  @Override public void setView(View v) {
+  @Override
+  public void setView(View v) {
     view = v;
     view.addFeatures(this);
   }
 
-  @Override public void toggleColor() {
+  @Override
+  public void toggleColor() {
     view.toggleColor();
   }
 
-  @Override public void makeUppercase() {
+  @Override
+  public boolean getUpperCase() {
+    return model.getUpperCase();
+  }
+
+  @Override
+  public void setUpperCase(boolean upperCase) {
+    model.setUpperCase(upperCase);
     String text = model.getString();
-    text = text.toUpperCase();
     view.setEchoOutput(text);
   }
 
-  @Override public void restoreToOriginalText() {
+  @Override
+  public void restoreToOriginalText() {
     String text = model.getString();
     view.setEchoOutput(text);
   }
 
-  @Override public void flipText() {
+  @Override
+  public void flipText() {
     String text = model.flipString();
     view.setEchoOutput(text);
   }
 
-  @Override public void echoOutput(String typed) {
+  @Override
+  public void echoOutput(String typed) {
     // Send text to the model.
     model.setString(typed);
 
@@ -56,7 +67,13 @@ public class Controller implements Features {
     view.resetFocus();
   }
 
-  @Override public void exitProgram() {
+  @Override
+  public String getText() {
+    return model.getString();
+  }
+
+  @Override
+  public void exitProgram() {
     System.exit(0);
   }
 }

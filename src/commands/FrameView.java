@@ -22,6 +22,8 @@ public class FrameView extends JFrame implements View {
   private final JButton flipTextButton;
   private final JTextField input;
 
+  private Features features;
+
   /**
    * Initialize the window.
    *
@@ -79,27 +81,34 @@ public class FrameView extends JFrame implements View {
 
   }
 
-  @Override public void addFeatures(Features features) {
+  @Override
+  public void addFeatures(Features features) {
+    this.features = features;
     echoButton.addActionListener(evt -> features.echoOutput(input.getText()));
     toggleButton.addActionListener(evt -> features.toggleColor());
-    makeUppercaseButton.addActionListener(evt -> features.makeUppercase());
+    makeUppercaseButton.addActionListener(evt -> {
+      this.toggleUpperCase();
+    });
     restoreOriginalTextButton.addActionListener(evt -> features.restoreToOriginalText());
     flipTextButton.addActionListener(evt -> features.flipText());
     exitButton.addActionListener(evt -> features.exitProgram());
     this.addKeyListener(new KeyListener() {
-      @Override public void keyTyped(KeyEvent e) {
+      @Override
+      public void keyTyped(KeyEvent e) {
         if (e.getKeyChar() == 't') {
           features.toggleColor();
         }
       }
 
-      @Override public void keyPressed(KeyEvent e) {
+      @Override
+      public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_C) {
-          features.makeUppercase();
+          toggleUpperCase();
         }
       }
 
-      @Override public void keyReleased(KeyEvent e) {
+      @Override
+      public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_C) {
           features.restoreToOriginalText();
         }
@@ -117,12 +126,14 @@ public class FrameView extends JFrame implements View {
     Requesting focus makes the component have focus AND removes focus from whoever had it
     before.
   */
-  @Override public void resetFocus() {
+  @Override
+  public void resetFocus() {
     this.setFocusable(true);
     this.requestFocus();
   }
 
-  @Override public void toggleColor() {
+  @Override
+  public void toggleColor() {
     if (this.display.getForeground().equals(Color.RED)) {
       this.display.setForeground(Color.BLACK);
     } else {
@@ -130,16 +141,43 @@ public class FrameView extends JFrame implements View {
     }
   }
 
-  @Override public void setEchoOutput(String text) {
+
+  @Override
+  public void setEchoOutput(String text) {
     display.setText(text);
   }
 
-  @Override public String getInputString() {
+  @Override
+  public String getInputString() {
     return input.getText();
   }
 
-  @Override public void clearInputString() {
+  @Override
+  public void clearInputString() {
     input.setText("");
+  }
+
+  private void toggleUpperCase() {
+    boolean isUpperCase = features.getUpperCase();
+
+    features.setUpperCase(!isUpperCase);
+
+    if (features.getUpperCase()) {
+      makeUppercaseButton.setText("Make Regular");
+      //
+    } else {
+      makeUppercaseButton.setText("Make Uppercase");
+    }
+    updateView();
+
+  }
+
+  private void updateView() {
+    // now get the text from the model
+    String currentText = features.getText();
+
+    // set the text in the view
+    display.setText(currentText);
   }
 
 }
