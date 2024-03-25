@@ -22,7 +22,7 @@ public class View extends JFrame implements ViewInterface {
   private final JButton flipTextButton;
   private final JTextField input;
 
-  private ControllerInterface features;
+  private ControllerInterface controllerFeatures;
 
   /**
    * Initialize the window.
@@ -84,23 +84,23 @@ public class View extends JFrame implements ViewInterface {
   }
 
   @Override
-  public void addFeatures(ControllerInterface features) {
-    this.features = features;
-    echoButton.addActionListener(evt -> features.echoOutput(input.getText()));
-    toggleButton.addActionListener(evt -> features.toggleColor());
+  public void addFeatures(ControllerInterface controllerFeatures) {
+    this.controllerFeatures = controllerFeatures;
+    echoButton.addActionListener(evt -> controllerFeatures.echoOutput(input.getText()));
+    toggleButton.addActionListener(evt -> controllerFeatures.toggleColor());
     makeUppercaseButton.addActionListener(evt -> {
       this.toggleUpperCase();
     });
-    restoreOriginalTextButton.addActionListener(evt -> features.restoreToOriginalText());
+    restoreOriginalTextButton.addActionListener(evt -> controllerFeatures.restoreToOriginalText());
     flipTextButton.addActionListener(evt -> {
       this.toggleFlipText();
     });
-    exitButton.addActionListener(evt -> features.exitProgram());
+    exitButton.addActionListener(evt -> controllerFeatures.exitProgram());
     this.addKeyListener(new KeyListener() {
       @Override
       public void keyTyped(KeyEvent e) {
         if (e.getKeyChar() == 't') {
-          features.toggleColor();
+          controllerFeatures.toggleColor();
         }
       }
 
@@ -114,7 +114,7 @@ public class View extends JFrame implements ViewInterface {
       @Override
       public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_C) {
-          features.restoreToOriginalText();
+          controllerFeatures.restoreToOriginalText();
         }
       }
     });
@@ -164,9 +164,9 @@ public class View extends JFrame implements ViewInterface {
   }
 
   private void toggleUpperCase() {
-    boolean isUpperCase = features.getUpperCase();
+    boolean isUpperCase = controllerFeatures.getUpperCase();
 
-    features.setUpperCase(!isUpperCase);
+    controllerFeatures.setUpperCase(!isUpperCase);
 
 
     updateView();
@@ -180,12 +180,12 @@ public class View extends JFrame implements ViewInterface {
   // TODO you probably want to call updateView() after you call the controller to set the flip state
   private void toggleFlipText() {
     // See avove.
-    features.flipText();
+    controllerFeatures.flipText();
   }
 
   private void updateView() {
     // Update the buttons that depend on model state
-    if (features.getUpperCase()) {
+    if (controllerFeatures.getUpperCase()) {
       makeUppercaseButton.setText("Make Regular");
       //
     } else {

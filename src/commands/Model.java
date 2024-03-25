@@ -22,8 +22,9 @@ public class Model implements ModelInterface {
   public String getString() {
     String result = input;
 
-    if (getFlip()) {
-      result = flipString(result);
+    if (flip) {
+      // TODO make sure you understand this line of code.
+      result = new StringBuilder(result).reverse().toString();
     }
 
     if (upperCase) {
@@ -55,13 +56,5 @@ public class Model implements ModelInterface {
     return false;
   }
 
-
-  private String flipString(String returnString) {
-    StringBuilder inverted = new StringBuilder();
-    for (int index = 0; index < returnString.length(); index++) {
-      inverted.append(this.input.charAt(this.input.length() - 1 - index));
-    }
-    return inverted.toString();
-  }
 
 }

@@ -39,6 +39,7 @@ public class Controller implements ControllerInterface {
     view.setEchoOutput(text);
   }
 
+  // TODO make sure this is called from the view as per setUpperCase
   @Override
   public void setFlipText(boolean flipText) {
     model.setFlip(flipText);
@@ -62,9 +63,9 @@ public class Controller implements ControllerInterface {
 
   /**
    * Flip the text.
-   *
    * This is functionality that should be in the model.
    */
+  // TODO make Your goal is to delete this function
   @Override
   public void flipText() {
     String text = model.getString();
