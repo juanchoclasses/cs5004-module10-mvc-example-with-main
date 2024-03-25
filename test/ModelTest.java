@@ -69,7 +69,7 @@ public class ModelTest {
     assertEquals("!DLROW ,OLLEH", m1.getString());
     m2.setUpperCase(true);
     m2.setFlip(true);
-    assertEquals(".EMAN YM TEHGROF REVEN LLIW UOY", m2.getString());
+    assertEquals(".EMAN YM TEGROF REVEN LLIW UOY", m2.getString());
 
     m1.setUpperCase(false);
     m1.setFlip(false);
