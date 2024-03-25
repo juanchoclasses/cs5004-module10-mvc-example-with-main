@@ -1,6 +1,6 @@
 import commands.Controller;
-import commands.ModelImpl;
-import commands.FrameView;
+import commands.Model;
+import commands.View;
 
 /**
  * The type Main. this holds the main method that runs the program.
@@ -13,9 +13,9 @@ public class Main {
    * @param args the args
    */
   public static void main(String[] args) {
-    ModelImpl model = new ModelImpl();
+    Model model = new Model();
 
-    FrameView view = new FrameView("5004 MVC Example");
+    View view = new View("5004 MVC Example");
 
     Controller controller = new Controller(model);
     controller.setView(view);

@@ -3,14 +3,14 @@ package commands;
 /**
  * Interface for an asynchronous controller. The user chooses the order of the commands.
  */
-public interface Features {
+public interface ControllerInterface {
 
   /**
    * Provide view with all the callbacks.
    *
    * @param v the view.
    */
-  void setView(View v);
+  void setView(ViewInterface v);
 
   /**
    * Toggle the color of the string.
@@ -32,7 +32,24 @@ public interface Features {
   boolean getUpperCase();
 
   /**
-   * get the text of the model
+   * set the flipText status.
+   *
+   * @param flipText true if the text should be flipped, false otherwise
+   */
+
+  void setFlipText(boolean flipText);
+
+  /**
+   * Get the flipText status.
+   *
+   * @return true if the text is flipped, false otherwise
+   */
+  boolean getFlipText();
+
+  /**
+   * get the text of the model.
+   *
+   * @return the text of the model
    */
   String getText();
 

@@ -1,23 +1,23 @@
 package commands;
 
 /**
- * Controller. Implementation of the Features interface.
+ * Controller. Implementation of the ControllerInterface interface.
  */
-public class Controller implements Features {
-  private final Model model;
-  private View view;
+public class Controller implements ControllerInterface {
+  private final ModelInterface model;
+  private ViewInterface view;
 
   /**
    * Constructor.
    *
-   * @param m the Model.
+   * @param m the ModelInterface.
    */
-  public Controller(Model m) {
+  public Controller(ModelInterface m) {
     model = m;
   }
 
   @Override
-  public void setView(View v) {
+  public void setView(ViewInterface v) {
     view = v;
     view.addFeatures(this);
   }
@@ -40,14 +40,36 @@ public class Controller implements Features {
   }
 
   @Override
-  public void restoreToOriginalText() {
+  public void setFlipText(boolean flipText) {
+    model.setFlip(flipText);
     String text = model.getString();
     view.setEchoOutput(text);
   }
 
   @Override
+  public boolean getFlipText() {
+    return model.getFlip();
+  }
+
+  @Override
+  public void restoreToOriginalText() {
+    model.setFlip(false);
+    model.setUpperCase(false);
+    String text = model.getString();
+    view.setEchoOutput(text);
+  }
+
+
+  /**
+   * Flip the text.
+   *
+   * This is functionality that should be in the model.
+   */
+  @Override
   public void flipText() {
-    String text = model.flipString();
+    String text = model.getString();
+    text = new StringBuilder(text).reverse().toString();
+
     view.setEchoOutput(text);
   }
 
