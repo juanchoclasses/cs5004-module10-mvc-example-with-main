@@ -1,13 +1,9 @@
 package commands;
 
-import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 /**
  * GUI Implementation of the ViewInterface interface. It features buttons a text field and a label.
@@ -32,50 +28,75 @@ public class View extends JFrame implements ViewInterface {
   public View(String caption) {
     super(caption);
 
-    setSize(500, 300);
+    setSize(400, 200);
+    setMinimumSize(new Dimension(500, this.getHeight()));
     setLocation(200, 200);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    this.setLayout(new FlowLayout());
+    this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
+
+    JPanel currentText = new JPanel();
+    currentText.setLayout(new FlowLayout(FlowLayout.LEFT));
+    JLabel currentTextLabel = new JLabel("Current text: ");
+
+    currentText.add(currentTextLabel);
+    currentText.add(Box.createHorizontalGlue());
 
 
-    display = new JLabel("To be displayed");
+    display = new JLabel("");
 
-    this.add(display);
+    currentText.add(display);
 
+
+    JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     // The textfield.
     input = new JTextField(10);
-    this.add(input);
+    inputPanel.add(input);
+    inputPanel.add(Box.createHorizontalGlue());
+
+    this.add(currentText);
 
     // Echo button.
-    echoButton = new JButton("Echo");
-    echoButton.setActionCommand("Echo Button");
-    this.add(echoButton);
+    echoButton = new JButton("Input");
+    echoButton.setActionCommand("Input Button");
+    inputPanel.add(echoButton);
+
+    this.add(inputPanel);
+
+    JPanel commandPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
     // Toggle color button.
     toggleButton = new JButton("Toggle color");
     toggleButton.setActionCommand("Toggle color");
-    this.add(toggleButton);
+    commandPanel.add(toggleButton);
+    commandPanel.add(Box.createHorizontalGlue());
 
     // Make Uppercase button.
     makeUppercaseButton = new JButton("Make Uppercase");
     makeUppercaseButton.setActionCommand("Make Uppercase");
-    this.add(makeUppercaseButton);
-
-    // Restore Original text button.
-    restoreOriginalTextButton = new JButton("Restore text");
-    restoreOriginalTextButton.setActionCommand("Restore text");
-    this.add(restoreOriginalTextButton);
+    commandPanel.add(makeUppercaseButton);
+    commandPanel.add(Box.createHorizontalGlue());
 
     // Flip text button.
     flipTextButton = new JButton("Flip text");
     flipTextButton.setActionCommand("Flip text");
-    this.add(flipTextButton);
+    commandPanel.add(flipTextButton);
+    this.add(commandPanel);
+
+    JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+    // Restore Original text button.
+    restoreOriginalTextButton = new JButton("Restore text");
+    restoreOriginalTextButton.setActionCommand("Restore text");
+    bottomPanel.add(restoreOriginalTextButton);
+    bottomPanel.add(Box.createHorizontalGlue());
+
 
     //exit button
     exitButton = new JButton("Exit");
     exitButton.setActionCommand("Exit Button");
-    this.add(exitButton);
+    bottomPanel.add(exitButton);
+    this.add(bottomPanel);
 
     pack();
     setVisible(true);
@@ -91,10 +112,11 @@ public class View extends JFrame implements ViewInterface {
     makeUppercaseButton.addActionListener(evt -> {
       this.toggleUpperCase();
     });
-    restoreOriginalTextButton.addActionListener(evt -> controllerFeatures.restoreToOriginalText());
+
     flipTextButton.addActionListener(evt -> {
       this.toggleFlipText();
     });
+    restoreOriginalTextButton.addActionListener(evt -> controllerFeatures.restoreToOriginalText());
     exitButton.addActionListener(evt -> controllerFeatures.exitProgram());
     this.addKeyListener(new KeyListener() {
       @Override
@@ -179,7 +201,7 @@ public class View extends JFrame implements ViewInterface {
   // TODO then call the controller to set the flip state to the opposite of the current state
   // TODO you probably want to call updateView() after you call the controller to set the flip state
   private void toggleFlipText() {
-    // See avove.
+    // See above.
     controllerFeatures.flipText();
   }
 
@@ -194,6 +216,7 @@ public class View extends JFrame implements ViewInterface {
 
     // TODO update the flipTextButton text based on the controller's flip state
     // TODO see how we did it for upper case.
+
 
   }
 

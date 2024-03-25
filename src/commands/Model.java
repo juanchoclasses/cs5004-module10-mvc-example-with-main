@@ -46,7 +46,6 @@ public class Model implements ModelInterface {
 
   @Override
   public void setFlip(boolean flip) {
-
     // TODO update the flip variable and set it here.
   }
 
